@@ -17,8 +17,9 @@ module.exports = {
         }
 
         // Get the first 10 songs in the queue
-        const queueString = queue.tracks.slice(0, 10).map((song, i) => {
-            return `${i}) \`[${song.duration}] ${song.title}\` - <@${song.requestedBy.id}>`
+        const queueString = queue.tracks.slice(0, 20).map((song, i) => {
+            // Display a every second song
+            if (i % 2 == 1) { return `${i/2 + 0.5}) \`[${song.duration}] ${song.title}\` - <@${song.requestedBy.id}>` }
         }).join("\n")
 
         // Get the current song

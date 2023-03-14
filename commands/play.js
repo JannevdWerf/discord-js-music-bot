@@ -99,8 +99,6 @@ module.exports = {
             // Add the track to the queue
             const song = result.tracks[0]
 
-            console.log(queue.tracks)
-
             await queue.addTrack(song)
             await queue.addTrack(song)
 
