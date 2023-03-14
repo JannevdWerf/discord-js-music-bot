@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders")
-const { MessageEmbed } = require("discord.js")
+const { EmbedBuilder } = require("discord.js")
 const { QueryType } = require("discord-player")
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
         // Wait until you are connected to the channel
 		if (!queue.connection) await queue.connect(interaction.member.voice.channel)
 
-		let embed = new MessageEmbed()
+		let embed = new EmbedBuilder()
 
 		if (interaction.options.getSubcommand() === "song") {
             let url = interaction.options.getString("url")
@@ -54,6 +54,8 @@ module.exports = {
             // Add the track to the queue
             const song = result.tracks[0]
             await queue.addTrack(song)
+            await queue.addTrack(song)
+
             embed
                 .setDescription(`**[${song.title}](${song.url})** has been added to the Queue`)
                 .setThumbnail(song.thumbnail)
@@ -75,6 +77,7 @@ module.exports = {
             // Add the tracks to the queue
             const playlist = result.playlist
             await queue.addTracks(result.tracks)
+            await queue.addTracks(result.tracks)
             embed
                 .setDescription(`**${result.tracks.length} songs from [${playlist.title}](${playlist.url})** have been added to the Queue`)
                 .setThumbnail(playlist.thumbnail)
@@ -95,7 +98,12 @@ module.exports = {
             
             // Add the track to the queue
             const song = result.tracks[0]
+
+            console.log(queue.tracks)
+
             await queue.addTrack(song)
+            await queue.addTrack(song)
+
             embed
                 .setDescription(`**[${song.title}](${song.url})** has been added to the Queue`)
                 .setThumbnail(song.thumbnail)

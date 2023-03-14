@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders")
-const { MessageEmbed } = require("discord.js")
+const { EmbedBuilder } = require("discord.js")
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -18,7 +18,7 @@ module.exports = {
 
         // Get the first 10 songs in the queue
         const queueString = queue.tracks.slice(0, 10).map((song, i) => {
-            return `${i}) [${song.duration}]\` ${song.title} - <@${song.requestedBy.id}>`
+            return `${i}) \`[${song.duration}] ${song.title}\` - <@${song.requestedBy.id}>`
         }).join("\n")
 
         // Get the current song
@@ -26,7 +26,7 @@ module.exports = {
 
         await interaction.reply({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(`**Currently Playing**\n` + 
                         (currentSong ? `\`[${currentSong.duration}]\` ${currentSong.title} - <@${currentSong.requestedBy.id}>` : "None") +
                         `\n\n**Queue**\n${queueString}`
